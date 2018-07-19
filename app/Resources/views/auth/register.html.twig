@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+{% block title %}Регистрация{% endblock %}
+{% block stylesheetscustom %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/auth/register.css') }}">
+    {#<link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">#}
+{% endblock %}
+{% block header %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <a href="{{ path('homepage') }}">&larr; на главную</a>
+            </div>
+            <div class="offset-md-6 col-md-3">
+                <a href="{{ path('login') }}">Войти</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block body %}
+    <div class="container-fluid">
+        <h4>Регистрация</h4>
+        {#{{ dump(errors.message) }}#}
+        {{ form_start(form_register, {'attr' : {'id' : 'form-register'}}) }}
+        {#{{ form_errors(form_register) }}#}
+        {#логин#}
+        <div class="form-group row">
+            <div class="col-md-2">
+                {{ form_label(form_register.login, 'Логин' , {'label_attr' : {'class' : 'col-form-label'}}) }}
+            </div>
+            <div class="col-md-4 login">
+                {{ form_widget(form_register.login, {'attr' : {'class' : 'form-control'}}) }}
+                {{ form_errors(form_register.login, {'attr' : {'class' : 'form-register-errors-message'}}) }}
+            </div>
+        </div>
+        {#пароль#}
+        <div class="form-group row">
+            <div class="col-md-2">
+                {{ form_label(form_register.password, 'Пароль' , {'label_attr' : {'class' : 'col-form-label'}}) }}
+            </div>
+            <div class="col-md-4 password">
+                {{ form_widget(form_register.password, {'attr' : {'class' : 'form-control'}}) }}
+                {{ form_errors(form_register.password, {'attr' : {'class' : 'form-register-errors-message'}}) }}
+            </div>
+            <div class="col-md-4 text-left">
+                <input type="checkbox" class="form-check-inline" id="show-password" placeholder="">
+                <label class="col-form-label">Показать пароль</label>
+            </div>
+        </div>
+        {#аватарка#}
+        <div class="form-group row">
+            <div class="col-md-2">
+                {{ form_label(form_register.file, 'Аватар' , {'label_attr' : {'class' : 'col-form-label'}}) }}
+            </div>
+            <div class="col-md-4 file">
+                <div class="custom-file">
+                    {{ form_widget(form_register.file, {'attr' : {'class' : 'custom-file-input'}}) }}
+                    <div class="custom-file-label">Выберите файл</div>
+                </div>
+                {{ form_errors(form_register.file, {'attr' : {'class' : 'form-register-errors-message'}}) }}
+            </div>
+        </div>
+        {#пол#}
+        <div class="form-group row">
+            <div class="col-md-2">
+                {{ form_label(form_register.gender, 'Пол' , {'label_attr' : {'class' : 'col-form-label'}}) }}
+            </div>
+            <div class="col-md-4">
+                {{ form_widget(form_register.gender, {'attr' : {'class' : 'form-control'}}) }}
+            </div>
+        </div>
+        {#регистрация#}
+        <div class="row">
+            <div class="offset-md-2 col-md-4">
+                {{ form_widget(form_register.save, {'attr' : {'class' : 'btn btn-primary'}}) }}
+            </div>
+            <div class="load col-md-2">
+                <img id="preloader" hidden src="{{ asset('content/Eclipse-2s-200px.svg') }}">
+            </div>
+        </div>
+        {{ form_end(form_register) }}
+        {#<div id="errors">#}
+            {#{% if errors is defined %}#}
+                {#{{ dump(errors) }}#}
+            {#{% endif %}#}
+        {#</div>#}
+    </div>
+{% endblock %}
+{% block javascriptscustom %}
+    <script rel="script" src="{{ asset('js/register_page_script/upload_file_name.js') }}"></script>
+    <script rel="script" src="{{ asset('js/register_page_script/validation.js') }}"></script>
+    <script rel="script" src="{{ asset('js/register_page_script/show_password.js') }}"></script>
+{% endblock %}

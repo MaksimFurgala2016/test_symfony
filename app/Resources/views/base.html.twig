@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Лучшие люди интернета{% endblock %}</title>
+        {% block stylesheets %}
+            {#reset#}
+            <link rel="stylesheet" type="text/css" href="{{ asset('css/reset.css') }}">
+            {#bootstrap v.4 #}
+            <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap/bootstrap.min.css') }}">
+            {#fonts#}
+            <link rel="stylesheet" type="text/css" href="{{ asset('css/fontface.css') }}">
+            {#fontawesome#}
+            <link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css') }}">
+            {#header#}
+            <link rel="stylesheet" type="text/css" href="{{ asset('css/header.css') }}">
+            {#content#}
+            <link rel="stylesheet" type="text/css" href="{{ asset('css/content.css') }}">
+            {#footer#}
+            <link rel="stylesheet" type="text/css" href="{{ asset('css/footer.css') }}">
+            {#login#}
+            {#<link rel="stylesheet" type="text/css" href="{{ asset('css/auth/login.css') }}">#}
+            {#ico#}
+            <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        {% endblock %}
+        {% block stylesheetscustom %}
+            {#кастомизация для отдельных страниц#}
+        {% endblock %}
+    </head>
+    <body>
+        {% block header %}
+            <div class="header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 header-text">
+                            <div class="container-fluid">
+                                <h4>Лучшие люди интернета</h4>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="avatar">
+                                <a href="{{ path('login') }}">Войти</a><br>
+                                <a href="{{ path('register') }}">Зарегистрироваться</a><br>
+                                <a href="{{ path('personal_page') }}">Личный кабинет</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
+        {% block body %}{% endblock %}
+        {% block javascripts %}
+            <script rel="script" src="{{ asset('js/jQuery/jquery-3.2.1.min.js') }}"></script>
+            <script rel="script" src="{{ asset('js/jQuery/jquery.validate.min.js') }}"></script>
+            <script rel="script" src="{{ asset('js/jQuery/additional-methods.min.js') }}"></script>
+        {% endblock %}
+        {% block javascriptscustom %}
+            {#кастомизация JS для разных страниц#}
+        {% endblock %}
+    </body>
+    {% block footer %}
+        <footer style="">
+            <div class="container">
+                <div class="row">
+                    <div class="offset-md-2 col-md-8">
+                        &copy;Copyright, Maxim Furgala 2018, Development
+                    </div>
+                </div>
+            </div>
+        </footer>
+    {% endblock %}
+</html>

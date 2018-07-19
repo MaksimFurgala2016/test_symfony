@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AACE,4BAAM;EACJ,aAAa,EAAE,GAAG;EAClB,KAAK,EAAE,IAAI;EACX,MAAM,EAAE,IAAI",
+"sources": ["personal-page.sass"],
+"names": [],
+"file": "personal-page.css"
+}

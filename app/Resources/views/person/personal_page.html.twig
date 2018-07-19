@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+{% block title %}Персональная страница{% endblock %}
+{% block stylesheetscustom %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/content/personal-page.css') }}">
+{% endblock %}
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-1">
+                <img class="img-fluid" src="{{ asset('content/avatar-man-icon.png') }}">
+            </div>
+            <div class="col-md-8">
+                <span>Имя пользователя</span><br>
+                <a href="#">Изменить информацию о себе</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="offset-md-1 col-8 rating-personal-page">
+                <span>Карма: <span>567</span></span><br>
+                <button>+</button>
+                <button>-</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <hr>
+                <div class="container-fluid">
+                    <div class="row">
+                        <h4>История</h4>
+                    </div>
+                    <!--действие-отдельная строка-->
+                    <div class="row">
+                        <div class="comments-text">
+                            <span>Дата</span>
+                            <span><a href="#">Пользователь</a></span>
+                            <span>Поставил + </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="action-text">
+                            <span>Дата</span>
+                            <span><a href="#">Пользователь</a></span>
+                            <span>Поставила - </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid">
+                    <div class="row">
+                        <h4>Комментарии</h4>
+                    </div>
+                    <div class="row">
+                        <div class="comments-text">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer efficitur ligula vitae eleifend malesuada. Aliquam non orci vestibulum, pharetra enim sit amet, euismod leo. Phasellus pellentesque mi quis placerat semper. Phasellus quis enim quis dui egestas sodales. Vivamus a lectus eu tellus sodales pharetra malesuada a est. Pellentesque accumsan maximus quam ac commodo. Vestibulum cursus dolor purus. Nam imperdiet tortor id massa efficitur, in tincidunt sapien semper. Praesent tempor convallis justo. Sed non libero at mauris finibus egestas. Vestibulum gravida condimentum leo, quis bibendum felis.
+                        </div>
+                        <div>
+                            <span>Написал</span>
+                            <span><a href="#">Пользователь</a></span>
+                            <span>Дата</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid">
+                    <div class="row">
+                        <h5>Оставить комментарий</h5>
+                    </div>
+                    <div class="row">
+                        <form class="container-fluid" method="post">
+                            <textarea style="height: 100px" class="container-fluid" placeholder="Введите текст комментария..."></textarea>
+                            <button>Написать</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {#<ul>#}
+            {#{% for user in users %}#}
+                {#<li>{{ user.id }}</li>#}
+            {#{% endfor %}#}
+        {#</ul>#}
+    </div>
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+{% block title %}Страница авторизации{% endblock %}
+{% block stylesheetscustom %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/auth/login.css') }}">
+{% endblock %}
+{% block header %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <a href="{{ path('homepage') }}">&larr; на главную</a>
+            </div>
+            <div class="offset-md-6 col-md-3">
+                <a href="{{ path('register') }}">Зарегистрироваться</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block body %}
+    <body>
+    <div class="container-fluid">
+        <h4>Войти</h4>
+        {{ form_start(form_login) }}
+        {{ form_widget(form_login) }}
+        <img src="{{ captcha.inline }}">
+        {{ form_end(form_login) }}
+        {#{{ form_start(form_login) }}#}
+        {#<div class="form-group row">#}
+            {#<div class="col-md-2">#}
+                {#{{ form_label(form_login.login, 'Логин', {'label_attr': {'class' : 'col-form-label'}}) }}#}
+            {#</div>#}
+            {#<div class="col-md-4">#}
+                {#{{ form_widget(form_login.login, {'attr' : {'class' : 'form-control'}}) }}#}
+            {#</div>#}
+        {#</div>#}
+        {#<div class="form-group row">#}
+            {#<div class="col-md-2">#}
+                {#{{ form_label(form_login.password, 'Пароль', {'label_attr' : {'class' : 'col-form-label'}}) }}#}
+            {#</div>#}
+            {#<div class="col-md-4">#}
+                {#{{ form_widget(form_login.password, {'attr' : {'class' : 'form-control'}}) }}#}
+            {#</div>#}
+        {#</div>#}
+        {#<div class="row">#}
+            {#<div class="errors_data">#}
+
+            {#</div>#}
+        {#</div>#}
+        {#<div class="form-group row">#}
+            {#<div class="offset-md-2 col-md-4 text-left">#}
+                {#<img src="{{ captcha.inline}}" class="img-thumbnail">#}
+            {#</div>#}
+        {#</div>#}
+        {#<div class="form-group row">#}
+            {#<div class="col-md-2">#}
+                {#{{ form_label(form_login.captcha, 'Текст с картинки', {'label_attr' : {'class' : 'col-form-label'}}) }}#}
+            {#</div>#}
+            {#<div class="col-md-4">#}
+                {#{{ form_widget(form_login.captcha, {'attr' : {'class' : 'form-control'}}) }}#}
+                {#{{ error_captcha }}#}
+            {#</div>#}
+        {#</div>#}
+        {#<div class="row">#}
+            {#<div class="offset-md-2 col-md-4">#}
+                {#{{ form_widget(form_login.save, {'attr' : {'class' : 'btn btn-primary'}}) }}#}
+            {#</div>#}
+        {#</div>#}
+        {#{{ form_end(form_login) }}#}
+    </div>
+    </body>
+{% endblock %}

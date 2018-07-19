@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="body">
+        <div class="container-fluid">
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-4">
+                        {% for user in users %}
+                            <div class="card-block-people">
+                                <div class="container content-card-block-people">
+                                    <div class="row">
+                                        <div class="card-people col-md-4 align-self-center">
+                                            <figure>
+                                                <!--если аватар существует, то выводим картинку-->
+                                                {% if user.file != null %}
+                                                <img class="avatar-ico img-fluid" src="{{ 'uploads/avatars/' | imagine_filter("my_thumb") ~ user.file }}" alt="icon">
+                                                <!--если нет, то выводим заглушку-иконку в соответствии с полом-->
+                                                {% else %}
+                                                    <!--женщина-->
+                                                    {% if user.gender == 0 %}
+                                                    <img class="avatar-ico img-fluid" src="{{ 'content/avatar-woman-icon.png' | imagine_filter('my_thumb') }}" alt="icon">
+                                                    <!--мужчина-->
+                                                    {% else %}
+                                                    <img class="avatar-ico img-fluid" src="{{ 'content/avatar-man-icon.png' | imagine_filter('my_thumb') }}" alt="icon">
+                                                    {% endif %}
+                                                {% endif %}
+                                                <figcaption>{{ user.login }}</figcaption>
+                                            </figure>
+                                        </div>
+                                        <div class="col-md-4 align-self-center rating">
+                                            <p>{{ user.karma }}</p>
+                                        </div>
+                                        <div class="col-md-4 align-self-center controls-rating">
+                                            <div class="container">
+                                                <button class="">+</button><br>
+                                                <button class="">-</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

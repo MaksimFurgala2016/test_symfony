@@ -1,0 +1,14 @@
+@charset "UTF-8";
+/* ╨Я╨╛╨┤╨║╨╗╤О╤З╨╡╨╜╨╕╨╡ ╤И╤А╨╕╤Д╤В╨╛╨▓ OpenSansLight */
+/* */
+@font-face {
+  font-family: OpenSansLight;
+  src: url("fonts/OpenSans-Light.ttf") format("truetype"); }
+@font-face {
+  font-family: OpenSansBold;
+  src: url("fonts/OpenSans-Bold.ttf") format("truetype"); }
+@font-face {
+  font-family: OpenSansSemibold;
+  src: url("fonts/OpenSans-Semibold.ttf") format("truetype"); }
+
+/*# sourceMappingURL=fontface.css.map */
