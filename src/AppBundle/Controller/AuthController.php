@@ -4,45 +4,29 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
 use AppBundle\Models;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\QueryBuilder;
-
 use Gregwar\Captcha\CaptchaBuilder;
 use Gregwar\Captcha\CaptchaBuilderInterface;
+use Gregwar\CaptchaBundle\GregwarCaptchaBundle;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use function Symfony\Component\Debug\Tests\testHeader;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Gregwar\CaptchaBundle\Type\CaptchaType;
 
+/*
+ * класс регистрации и авторизации пользователя
+ */
 class AuthController extends Controller
 {
-
+    /*
+     * index
+     */
     public function indexAction($name)
     {
         return $this->render('', array('name' => $name));
-    }
-
-    public function checkUserDataBase($login, $password)
-    {
-        $user = $this->getDoctrine()->getRepository('AppBundle:User')
-            ->findBy(array('login' => $login, 'password' => $password));
-        if ($user != null)
-            return true;//найден
-        else return false;//не найден
-    }
-
-    public function generateCaptcha()
-    {
-        $captcha = new CaptchaBuilder();
-        $captcha->build()->save('out.jpg');
-        return $captcha;
     }
 
     /**
@@ -61,21 +45,22 @@ class AuthController extends Controller
             ->getForm();
         $form->handleRequest($request);
         $user = $form->getViewData();
+        //если отправлена форма, то
         if ($form->isSubmitted()) {
-            if ($_SESSION['phrase'] == $user->getCaptcha()) {
+                //проверяем логин и пароль
                 if ($this->checkUserDataBase($user->getLogin(), $user->getPassword()) == true) {
-                    //делаем редирект, сохраняем данный об успеной авторизации
-                    return $this->redirectToRoute('homepage');
+                    //совпадает ли код капчи с введенным кодом
+                    if ($_SESSION['phrase'] == $user->getCaptcha()) {
+                        //делаем редирект, сохраняем данный об успеной авторизации
+                        return $this->redirectToRoute('homepage');
+                    }
+                    $captcha = $this->CookieSetCaptcha();
+                    return $this->render('auth/login.html.twig', array('form_login' => $form->createView(), 'captcha' => $captcha));
                 }
-                $captcha = $this->generateCaptcha();
-                $captcha_code = $captcha->getPhrase();
-                $_SESSION['phrase'] = $captcha_code;
+                $captcha = $this->CookieSetCaptcha();
                 return $this->render('auth/login.html.twig', array('form_login' => $form->createView(), 'captcha' => $captcha));
-            }
         }
-        $captcha = $this->generateCaptcha();
-        $captcha_code = $captcha->getPhrase();
-        $_SESSION['phrase'] = $captcha_code;
+        $captcha = $this->CookieSetCaptcha();
     return $this->render('auth/login.html.twig', array('form_login' => $form->createView(),'captcha' => $captcha));
     }
 
@@ -96,7 +81,6 @@ class AuthController extends Controller
             ->getForm();
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
-//            $uploadFile = $request->files->;
             $validator = $this->get('validator');
             $errors = $validator->validate($user);
             if ($form->isValid()) {
@@ -109,11 +93,36 @@ class AuthController extends Controller
                 return $this->redirectToRoute('homepage');
             }
             else {
+                //если есть ошибки, то выводим
                 if (count($errors) > 0) {
                     return $this->render('auth/register.html.twig', array('errors' => $errors, 'form_register' =>$form->createView()));
                 }
             }
         }
         return $this->render('auth/register.html.twig', array('form_register' =>$form->createView()));
+    }
+
+    /*
+     * проверка на наличие пользователя в БД по логину и паролю
+     */
+    public function checkUserDataBase($login, $password)
+    {
+        $user = $this->getDoctrine()->getRepository('AppBundle:User')
+            ->findBy(array('login' => $login, 'password' => $password));
+        if ($user != null)
+            return true;//найден
+        else return false;//не найден
+    }
+
+    /*
+     *создание объекта капчи
+     * сохраняем в SESSION код капчи
+     */
+    public function CookieSetCaptcha ()
+    {
+        $captcha = new CaptchaBuilder();
+        $captcha->build()->save('out.jpg');
+        $_SESSION['phrase'] = $captcha->getPhrase();
+        return $captcha;
     }
 }
