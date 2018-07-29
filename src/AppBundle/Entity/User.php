@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
@@ -197,5 +198,43 @@ class User
     {
         return $this->karma;
     }
+
+    /**
+     * @return array
+     */
+    public function getRoles()
+    {
+        return ['ROLE_USER'];
+    }
+
+    /**
+     * @return null
+     */
+    public function getSalt()
+    {
+        return null;
+    }
+
+    /**
+     *
+     */
+    public function eraseCredentials() {}
+
+    /**
+     * @return string
+     */
+    public function serialize(): string
+    {
+        return serialize([
+            $this->id,
+            $this->login,
+            $this->password,
+        ]);
+    }
+
+//    public function unserialize($serialized)
+//    {
+//        [$this->id, $this->login, $this->password] = unserialize($serialized);
+//    }
 }
 

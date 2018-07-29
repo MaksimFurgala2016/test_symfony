@@ -41,9 +41,9 @@
                 {{ form_widget(form_register.password, {'attr' : {'class' : 'form-control'}}) }}
                 {{ form_errors(form_register.password, {'attr' : {'class' : 'form-register-errors-message'}}) }}
             </div>
-            <div class="col-md-4 text-left">
-                <input type="checkbox" class="form-check-inline" id="show-password" placeholder="">
-                <label class="col-form-label">Показать пароль</label>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="show-password">
+                <label class="custom-control-label" for="show-password">Показать пароль</label>
             </div>
         </div>
         {#аватарка#}

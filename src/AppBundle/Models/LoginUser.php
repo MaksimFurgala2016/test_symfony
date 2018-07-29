@@ -9,6 +9,8 @@
 namespace AppBundle\Models;
 
 
+use FOS\UserBundle\Model\UserInterface;
+
 class LoginUser
 {
     private $login;
@@ -18,6 +20,11 @@ class LoginUser
     private $captcha;
 
     private $captchaPic;
+
+    public function getRoles()
+    {
+        return ['ROLE_USER'];
+    }
 
     public function setLogin($login)
     {

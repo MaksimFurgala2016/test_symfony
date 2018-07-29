@@ -22,7 +22,7 @@ class DefaultController extends Controller
         $users = $em
             ->getRepository('AppBundle:User')
             ->findAll();
-//        $users->setFile(new File($this->));
-        return $this->render('default/index.html.twig', array('users' => $users));
+        $a = "gvchbwjdjwiw";
+        return $this->render('default/index.html.twig', array('users' => $users, 'var' => $a ));
     }
 }

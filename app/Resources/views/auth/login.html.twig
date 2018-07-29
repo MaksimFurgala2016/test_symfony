@@ -20,51 +20,65 @@
     <div class="container-fluid">
         <h4>Войти</h4>
         {{ form_start(form_login) }}
-        {{ form_widget(form_login) }}
-        <img src="{{ captcha.inline }}">
+        <div class="row">
+            <div class="offset-md-2 col-md-4">
+                {#ошибка при неверном логине или пароле#}
+                <div class="errors-auth">
+                    <ul>
+                        {% if errors is defined %}
+                            {% for item in errors %}
+                                <li>{{ item }}</li>
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-2 text-right">
+                {{ form_label(form_login.login, 'Логин', {'label_attr' : {'class' : 'col-form-label'}}) }}
+            </div>
+            <div class="col-md-4">
+                {{ form_widget(form_login.login, {'attr' : {'class' : 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-2 text-right">
+                {{ form_label(form_login.password, 'Пароль', {'label_attr' : {'class' : 'col-form-label'}}) }}
+            </div>
+            <div class="col-md-4">
+                {{ form_widget(form_login.password, {'attr' : {'class' : 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="form-group row text-right">
+            <div class="offset-md-2 col-md-2 text-left">
+                <img src="{{ captcha.inline }}" class="img-fluid">
+            </div>
+            <div class="col-md-2">
+                <div class="errors-auth text-center">
+                    {% if error_captcha is defined %}
+                        {{ error_captcha }}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-2 text-right">
+                {{ form_label(form_login.captcha, 'Текст с картинки', {'label_attr' : {'class' : 'col-form-label'}}) }}
+            </div>
+            <div class="col-md-4">
+                {{ form_widget(form_login.captcha, {'attr' : {'class' : 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="offset-md-2 col-md-4">
+                {{ form_widget(form_login.save, {'attr' : {'class' : 'btn btn-primary'}}) }}
+            </div>
+        </div>
         {{ form_end(form_login) }}
-        {#{{ form_start(form_login) }}#}
-        {#<div class="form-group row">#}
-            {#<div class="col-md-2">#}
-                {#{{ form_label(form_login.login, 'Логин', {'label_attr': {'class' : 'col-form-label'}}) }}#}
-            {#</div>#}
-            {#<div class="col-md-4">#}
-                {#{{ form_widget(form_login.login, {'attr' : {'class' : 'form-control'}}) }}#}
-            {#</div>#}
-        {#</div>#}
-        {#<div class="form-group row">#}
-            {#<div class="col-md-2">#}
-                {#{{ form_label(form_login.password, 'Пароль', {'label_attr' : {'class' : 'col-form-label'}}) }}#}
-            {#</div>#}
-            {#<div class="col-md-4">#}
-                {#{{ form_widget(form_login.password, {'attr' : {'class' : 'form-control'}}) }}#}
-            {#</div>#}
-        {#</div>#}
-        {#<div class="row">#}
-            {#<div class="errors_data">#}
-
-            {#</div>#}
-        {#</div>#}
-        {#<div class="form-group row">#}
-            {#<div class="offset-md-2 col-md-4 text-left">#}
-                {#<img src="{{ captcha.inline}}" class="img-thumbnail">#}
-            {#</div>#}
-        {#</div>#}
-        {#<div class="form-group row">#}
-            {#<div class="col-md-2">#}
-                {#{{ form_label(form_login.captcha, 'Текст с картинки', {'label_attr' : {'class' : 'col-form-label'}}) }}#}
-            {#</div>#}
-            {#<div class="col-md-4">#}
-                {#{{ form_widget(form_login.captcha, {'attr' : {'class' : 'form-control'}}) }}#}
-                {#{{ error_captcha }}#}
-            {#</div>#}
-        {#</div>#}
-        {#<div class="row">#}
-            {#<div class="offset-md-2 col-md-4">#}
-                {#{{ form_widget(form_login.save, {'attr' : {'class' : 'btn btn-primary'}}) }}#}
-            {#</div>#}
-        {#</div>#}
-        {#{{ form_end(form_login) }}#}
     </div>
+    {% block javascriptscustom %}
+        <script rel="script" src="{{ asset('js/login_page/validation-login.js') }}"></script>
+    {% endblock %}
     </body>
 {% endblock %}

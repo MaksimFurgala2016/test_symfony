@@ -1,4 +1,10 @@
-form .form-group.row {
-  text-align: right; }
+.errors-auth {
+  color: darkred;
+  font-size: 10pt;
+  border-radius: 5px;
+  background-color: #f5c6cb;
+  padding-left: 7%; }
+  .errors-auth ul > li {
+    list-style: circle; }
 
 /*# sourceMappingURL=login.css.map */

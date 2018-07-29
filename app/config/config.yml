@@ -74,8 +74,14 @@ liip_imagine:
 
     filter_sets:
         cache: ~
+        # фильтр для условия тестового задания
         my_thumb:
             quality: 70
+            filters:
+                thumbnail: { size: [50, 50], mode: outbound }
+        # среднее качество
+        low_quality:
+            quality: 20
             filters:
                 thumbnail: { size: [50, 50], mode: outbound }
 #--------------------
